@@ -1,0 +1,64 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <!--definimos una vista-->
+    <!--cada vista que definamos se va a grabar en postgre en ir.iu.view-->
+    <record model="ir.ui.view" id="agenda.list">
+      <field name="name">Lista Agenda</field>
+      <!--sobre que modelo se aplica esta vista-->
+      <field name="model">agenda.agenda</field>
+      <!--definimos la vista-->
+      <field name="arch" type="xml">
+        <tree>
+          <!--viene de la clase agenda del modelo-->
+          <field name="nombre"/>
+          <field name="telefono"/>
+        </tree>
+      </field>
+    </record>
+
+
+<!-- actions opening views on models -->
+<!-- definimos las acciones -->
+    <record model="ir.actions.act_window" id="agenda.action_window">
+      <field name="name">Agenda window</field>
+      <field name="res_model">agenda.agenda</field>
+      <!--tipo de vista: lista y formulario-->
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="agenda.action_server">
+      <field name="name">Agenda server</field>
+      <field name="model_id" ref="model_agenda_agenda"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+    <!--defino una entrada en el menu principal-->
+    <menuitem name="Agenda" id="agenda.menu_root"/>
+
+    <!-- menu categories -->
+    <!--menu que van aparecer en la liena azul de odoo-->
+    <menuitem name="Menu 1" id="agenda.menu_1" parent="agenda.menu_root"/>
+<!--    <menuitem name="Menu 2" id="agenda.menu_2" parent="agenda.menu_root"/>
+-->
+    <!-- actions -->
+    <!--submenu dentro de Menu 1-->
+    <menuitem name="List" id="agenda.menu_1_list" parent="agenda.menu_1"
+              action="agenda.action_window"/>
+<!--    <menuitem name="Server to list" id="agenda" parent="agenda.menu_2"
+              action="agenda.action_server"/>
+-->
+  </data>
+</odoo>
